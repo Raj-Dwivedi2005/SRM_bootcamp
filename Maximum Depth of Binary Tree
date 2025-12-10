@@ -17,3 +17,16 @@ Input: root = [1,null,2]
 Output: 2
 
 Answer :- 
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        
+        int lh = maxDepth(root.left);
+        int rh = maxDepth(root.right);
+        int maxHeight = Math.max(lh, rh) + 1;
+        return maxHeight;
+        
+    }
+}
