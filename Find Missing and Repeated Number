@@ -18,3 +18,29 @@ Input: grid = [[9,1,7],[8,9,2],[3,4,6]]
 Output: [9,5]
 Explanation: Number 9 is repeated and number 5 is missing so the answer is [9,5].
 
+Answer:- 
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        int n = grid.length;
+        int missing = -1, repeat = -1;
+
+        // Store frequency of each number in the grid
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int[] row : grid) {
+            for (int num : row) {
+                freq.put(num, freq.getOrDefault(num, 0) + 1);
+            }
+        }
+
+        // Check numbers from 1 to n^2 to find missing and repeated values
+        for (int num = 1; num <= n * n; num++) {
+            if (!freq.containsKey(num)) {
+                missing = num;
+            } else if (freq.get(num) == 2) {
+                repeat = num;
+            }
+        }
+
+        return new int[]{repeat, missing};
+    }
+}
